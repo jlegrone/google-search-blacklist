@@ -1,7 +1,21 @@
-(function() {
+document.addEventListener('DOMContentLoaded', function () {
 
-	removeBlockedSites();
-	addMenuItems();
+	init();
+
+	// chrome.webNavigation.onHistoryStateUpdated.addListener(function(details) {
+ //    	console.log('Page uses History API and we heard a pushSate/replaceState.');
+ //    	// do your thing
+ //  	});
+
+	$(window).on("popstate", function(){
+	    console.log('popstate');
+	    window.setTimeout(init, 1000);
+	});
+
+	function init(){
+		removeBlockedSites();
+		addMenuItems();
+	}
 
 	function removeBlockedSites(){
 
@@ -84,4 +98,4 @@
 
 	}
 
-})();
+}, false);
