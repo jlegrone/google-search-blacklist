@@ -1,0 +1,25 @@
+{
+  "name": "Google Search Blacklist",
+  "version": "0.0.1",
+  "manifest_version": 2,
+  "description": "Block websites from appearing in Google Search results.",
+  "permissions": [
+    "*://www.google.com/search*",
+    "storage"
+  ],
+  "content_scripts": 
+  [
+    {
+      "matches": ["*://www.google.com/search*"],
+      "css": ["styles.css"],
+      "js": ["jquery/jquery.min.js", "search.js"],
+      "run_at": "document_end"
+    },
+    {
+      "matches": ["*://www.google.com/preferences*"],
+      "css": ["styles.css"],
+      "js": ["jquery/jquery.min.js", "preferences.js"],
+      "run_at": "document_end"
+    }
+  ]
+}

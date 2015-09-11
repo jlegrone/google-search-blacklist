@@ -1,0 +1,15 @@
+.hdtb-tl {
+	margin-right: 9px !important;
+}
+
+#chrome_blacklist_addon_table a {
+	visibility: hidden;
+}
+
+#chrome_blacklist_addon_table th {
+	text-align: left;
+}
+
+#chrome_blacklist_addon_table tr:hover a {
+	visibility: visible;
+}
