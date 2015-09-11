@@ -5,13 +5,13 @@ A Google Chrome extension which allows you to block websites from appearing with
 
 # Installation
 1. Download the source code
-2. Open chrome://extensions in Google Chrome
+2. Open [chrome://extensions](chrome://extensions) in Google Chrome
 3. Click 'Load Unpacked Extension' and select the root extension folder
 
 # Usage
 ### Blocking sites
 To add a site to your blacklist, click the dropdown menu to the right of the site address on your search results page, and select **Block example.com**.
 ### Editing block list
-To view and edit your blocked sites, visit www.google.com/preferences#search-blacklist.
+To view and edit your blocked sites, visit [google.com/preferences#search-blacklist](https://www.google.com/preferences#search-blacklist).
 
 ![alt tag](https://cloud.githubusercontent.com/assets/6752382/9807563/e259b58e-5822-11e5-8ab7-a41d8619c1db.png)
