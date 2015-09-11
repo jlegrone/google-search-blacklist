@@ -1,16 +1,6 @@
 document.addEventListener('DOMContentLoaded', function () {
 
-	init();
-
-	// chrome.webNavigation.onHistoryStateUpdated.addListener(function(details) {
- //    	console.log('Page uses History API and we heard a pushSate/replaceState.');
- //    	// do your thing
- //  	});
-
-	$(window).on("popstate", function(){
-	    console.log('popstate');
-	    window.setTimeout(init, 1000);
-	});
+	// This part of the script triggers when page is done loading
 
 	function init(){
 		removeBlockedSites();
@@ -26,7 +16,7 @@ document.addEventListener('DOMContentLoaded', function () {
 			if (!result.blacklist || result.blacklist.length < 1){
 				return;
 			}
-			var blacklist = result.blacklist;
+			blacklist = result.blacklist;
 			var hidden = [];
 
 			for (var i = 0; i < blacklist.length; i++){
@@ -36,6 +26,7 @@ document.addEventListener('DOMContentLoaded', function () {
 				});
 			}
 
+			// Notify that some results have been filtered from search
 			if (hidden.length > 0){
 				if (hidden.length == 1){
 					var message = hidden.length + ' result ';
@@ -43,7 +34,9 @@ document.addEventListener('DOMContentLoaded', function () {
 				else {
 					var message = hidden.length + ' results ';
 				}
-				$('#resultStats').append('<nobr>' + message + '<a href="https://www.google.com/preferences#search-blacklist" target="_blank">filtered</a></nobr>');
+
+				$('#resultStats').html($('#resultStats').html() + '<span id="googleBlacklistStats"></span>');
+				$('#googleBlacklistStats').html('<nobr>' + message + '<a href="https://www.google.com/preferences#search-blacklist" target="_blank" title="Edit Blacklist">filtered</a><span id="blacklist-hidden-sites">: ' + hidden.join(", ") + '</span></nobr>');
 			}
 		}
 	}	
@@ -59,16 +52,14 @@ document.addEventListener('DOMContentLoaded', function () {
 			ul.append('<li class="action-menu-item ab_dropdownitem" role="menuitem"><a class="fl blacklist_button" href="#" onmousedown="" tabindex="-1" data-domain="' + domain + '">Block ' + domain + '</a></li>');
 		}
 
-		// var btns = $("li.blacklist_button"); // .each().on('click', function(){console.log('hello')})
-
 		$( "a.blacklist_button" ).each(function(index) {
 		    $(this).on("click", function(){
-		        blacklist($(this).data('domain'));
+		        blacklistSite($(this).data('domain'));
 		    });
 		});
 	}
 
-	function blacklist(site){
+	function blacklistSite(site){
 
 		chrome.storage.sync.get("blacklist", storeNewData);
 		
@@ -90,12 +81,52 @@ document.addEventListener('DOMContentLoaded', function () {
 			}
 
 			chrome.storage.sync.set({'blacklist': blacklist}, function() {
-		  		// success
-		  		console.log(result);
+		  		// remove newly blocked site by reinitializing
+		  		init();
 			});
 
 		}
 
 	}
+
+	var resultNodes = [];
+
+	var observer = new MutationObserver(function(mutations) {
+
+		resultNodes = [];
+
+	    mutations.forEach(function(mutation) {
+
+	    	if (mutation.target.className == 'g' && mutation.attributeName == '__sp_done'){
+	    		resultNodes.push(mutation.target);
+	    	}
+
+	    });
+
+	    if (resultNodes.length > 0){
+	    	process(resultNodes);
+	    }
+
+	});
+
+	observer.init = function(){
+		this.observe(document.getElementById('search'), {
+	    	attributes: true,
+	    	subtree: true
+		});
+	};
+
+	function process(nodes){
+		// pause MutationObserver while manipulating DOM
+		observer.disconnect();
+
+		// perform operations
+		init();
+
+		// reinitialize MutationObserver
+		observer.init();
+	}
+
+	observer.init();
 
 }, false);

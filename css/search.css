@@ -1,0 +1,7 @@
+#blacklist-hidden-sites {
+	visibility: hidden;
+}
+
+#googleBlacklistStats:hover #blacklist-hidden-sites {
+	visibility: visible;
+}
