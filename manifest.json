@@ -11,14 +11,14 @@
   [
     {
       "matches": ["*://www.google.com/search*"],
-      "css": ["styles.css"],
-      "js": ["jquery/jquery.min.js", "search.js"],
+      "css": ["css/search.css"],
+      "js": ["js/vendor/jquery.min.js", "js/search.js"],
       "run_at": "document_end"
     },
     {
       "matches": ["*://www.google.com/preferences*"],
-      "css": ["styles.css"],
-      "js": ["jquery/jquery.min.js", "preferences.js"],
+      "css": ["css/preferences.css"],
+      "js": ["js/vendor/jquery.min.js", "js/preferences.js"],
       "run_at": "document_end"
     }
   ]
