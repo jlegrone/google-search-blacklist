@@ -4,7 +4,7 @@
 
 	function showBlockedSites(){
 
-		var html = '<div id="search-blacklist" class="sect" style="padding-top:4px"><div class="sectHdr"><h2>Blacklist Websites</h2></div><div class="subsect">Filter annoying websites from your Google Search results.<br><br>To add a site to your blacklist, click the dropdown menu to the right of the site address on the search results page, and select <b>Block &ltexamplesite.com&gt</b>.</div><div class="subsect"><div class="subsect"><a href="https://github.com/jlegrone/google-results-blacklist" id="">View Project on Github</a></div><table id="chrome_blacklist_addon_table"></table><div style="clear:both"></div></div></div>';
+		var html = '<div id="search-blacklist" class="sect" style="padding-top:4px"><div class="sectHdr"><h2>Blacklist Websites</h2></div><div class="subsect">Filter annoying websites from your Google Search results.<br><br>To add a site to your blacklist, click the dropdown menu to the right of the site address on the search results page, and select <b>Block &ltexamplesite.com&gt</b>.</div><div class="subsect"><div class="subsect"><a href="https://github.com/jlegrone/google-search-blacklist" id="">View Project on Github</a></div><table id="chrome_blacklist_addon_table"></table><div style="clear:both"></div></div></div>';
 
 		$('#srhSec').prepend(html);
 

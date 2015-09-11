@@ -7,4 +7,4 @@ A Google Chrome extension which allows you to block websites from appearing with
 3. Click 'Load Unpacked Extension' and select the root extension folder
 
 # Usage
-To add a site to your blacklist, click the dropdown menu to the right of the site address on your search results page, and select *Block <examplesite.com>*.
+To add a site to your blacklist, click the dropdown menu to the right of the site address on your search results page, and select *Block examplesite.com*.
