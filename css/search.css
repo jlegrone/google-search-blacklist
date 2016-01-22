@@ -5,3 +5,7 @@
 #googleBlacklistStats:hover #blacklist-hidden-sites {
 	visibility: visible;
 }
+
+.g {
+	/*visibility: hidden;*/
+}
