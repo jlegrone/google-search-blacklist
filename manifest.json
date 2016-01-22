@@ -1,10 +1,11 @@
 {
   "name": "Google Search Blacklist",
-  "version": "0.0.1",
+  "version": "0.1.0",
   "manifest_version": 2,
   "description": "Block websites from appearing in Google Search results.",
   "permissions": [
-    "*://www.google.com/search*",
+    "*://www.google.com/search",
+    "*://www.google.com/preferences",
     "storage"
   ],
   "content_scripts": 
