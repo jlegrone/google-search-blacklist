@@ -1,9 +1,22 @@
+// var blacklist = [];
+
+// chrome.storage.sync.get("blacklist", test);
+
+// function test(result){
+// 	if (result.blacklist){
+// 		blacklist = result.blacklist;
+// 	}
+// };
+
 document.addEventListener('DOMContentLoaded', function () {
 
 	// This part of the script triggers when page is done loading
 
+	init();
+
 	function init(){
 		removeBlockedSites();
+		// $('.g').css('visibility', 'visible');
 		addMenuItems();
 	}
 
@@ -49,7 +62,9 @@ document.addEventListener('DOMContentLoaded', function () {
 			ul = $(ulists[n]);
 			domain = ul.parents("div.action-menu.ab_ctl").siblings("cite._Rm")[0].textContent;
 			domain = domain.replace(/.*?:\/\//g, "").split(/(?:\/| )+/)[0];
-			ul.append('<li class="action-menu-item ab_dropdownitem" role="menuitem"><a class="fl blacklist_button" href="#" onmousedown="" tabindex="-1" data-domain="' + domain + '">Block ' + domain + '</a></li>');
+			if (!ul.children().last().data('blacklist')){
+				ul.append('<li class="action-menu-item ab_dropdownitem" role="menuitem" data-blacklist="true"><a class="fl blacklist_button" href="#" onmousedown="" tabindex="-1" data-domain="' + domain + '">Block ' + domain + '</a></li>');
+			}
 		}
 
 		$( "a.blacklist_button" ).each(function(index) {
