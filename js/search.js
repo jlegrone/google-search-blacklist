@@ -33,23 +33,52 @@ document.addEventListener('DOMContentLoaded', function () {
 			var hidden = [];
 
 			for (var i = 0; i < blacklist.length; i++){
-				$("cite:contains(" + blacklist[i] + ")").each(function(index){
+				$("cite:contains(" + blacklist[i] + ")").each(function(){
+					// Hide the result
 					$(this).parents("div.g").hide();
-					hidden.push(blacklist[i]);
+
+					// Save to hidden results array
+					var hiddenIndex = -1;
+					for (var n=0; n < hidden.length; n++){
+						if (hidden[n].domain == blacklist[i]){
+							hiddenIndex = n;
+							break
+						}
+					}
+					if (hiddenIndex > -1){
+						hidden[hiddenIndex].count++;
+					}
+					else {
+						hidden.push({
+							domain: blacklist[i],
+							count: 1
+						});
+					}
 				});
 			}
 
 			// Notify that some results have been filtered from search
 			if (hidden.length > 0){
-				if (hidden.length == 1){
-					var message = hidden.length + ' result ';
+				numHiddenResults = 0;
+				hidden.forEach(function(result){numHiddenResults += result.count});
+
+				if (numHiddenResults == 1){
+					var message = numHiddenResults + ' result ';
 				}
 				else {
-					var message = hidden.length + ' results ';
+					var message = numHiddenResults + ' results ';
 				}
 
+				var hiddenStringArray = hidden.map(function(result) {
+					var info = '';
+					if (result.count > 1){
+						info = ' (' + result.count + ')';
+					}
+				  return result.domain + info;
+				});
+
 				$('#resultStats').html($('#resultStats').html() + '<span id="googleBlacklistStats"></span>');
-				$('#googleBlacklistStats').html('<nobr>' + message + '<a href="https://www.google.com/preferences#search-blacklist" target="_blank" title="Edit Blacklist">filtered</a><span id="blacklist-hidden-sites">: ' + hidden.join(", ") + '</span></nobr>');
+				$('#googleBlacklistStats').html('<nobr>' + message + '<a href="https://www.google.com/preferences#search-blacklist" target="_blank" title="Edit Blacklist">filtered</a><span id="blacklist-hidden-sites">: ' + hiddenStringArray.join(', ') + '</span></nobr>');
 			}
 		}
 	}	
