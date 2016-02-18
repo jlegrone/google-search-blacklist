@@ -122,20 +122,14 @@ document.addEventListener('DOMContentLoaded', function () {
 
 	}
 
-	var resultNodes = [];
-
 	var observer = new MutationObserver(function(mutations) {
-
-		resultNodes = [];
 
 		mutations.forEach(function(mutation) {
 			if (mutation.target.className == 'g' && mutation.attributeName == '__sp_done'){
-				resultNodes.push(mutation.target)
+				mutationDetectedHandler();
+				return
 			}
-		});
-		if (resultNodes.length > 0){
-			process(resultNodes)
-		}
+		})
 
 	});
 
@@ -146,7 +140,7 @@ document.addEventListener('DOMContentLoaded', function () {
 		});
 	};
 
-	function process(nodes){
+	function mutationDetectedHandler(nodes){
 		// pause MutationObserver while manipulating DOM
 		observer.disconnect();
 
