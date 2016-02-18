@@ -1,17 +1,6 @@
-// var blacklist = [];
-
-// chrome.storage.sync.get("blacklist", test);
-
-// function test(result){
-// 	if (result.blacklist){
-// 		blacklist = result.blacklist;
-// 	}
-// };
-
 document.addEventListener('DOMContentLoaded', function () {
 
 	// This part of the script triggers when page is done loading
-
 	init();
 
 	function init(){
@@ -74,7 +63,7 @@ document.addEventListener('DOMContentLoaded', function () {
 					if (result.count > 1){
 						info = ' (' + result.count + ')';
 					}
-				  return result.domain + info;
+					return result.domain + info;
 				});
 
 				$('#resultStats').html($('#resultStats').html() + '<span id="googleBlacklistStats"></span>');
@@ -97,9 +86,9 @@ document.addEventListener('DOMContentLoaded', function () {
 		}
 
 		$( "a.blacklist_button" ).each(function(index) {
-		    $(this).on("click", function(){
-		        blacklistSite($(this).data('domain'));
-		    });
+			$(this).on("click", function(){
+				blacklistSite($(this).data('domain'));
+			});
 		});
 	}
 
@@ -125,8 +114,8 @@ document.addEventListener('DOMContentLoaded', function () {
 			}
 
 			chrome.storage.sync.set({'blacklist': blacklist}, function() {
-		  		// remove newly blocked site by reinitializing
-		  		init();
+				// remove newly blocked site by reinitializing
+				init();
 			});
 
 		}
@@ -140,13 +129,13 @@ document.addEventListener('DOMContentLoaded', function () {
 		resultNodes = [];
 
 		mutations.forEach(function(mutation) {
-    	if (mutation.target.className == 'g' && mutation.attributeName == '__sp_done'){
-    		resultNodes.push(mutation.target)
-    	}
-    });
-    if (resultNodes.length > 0){
-    	process(resultNodes)
-    }
+			if (mutation.target.className == 'g' && mutation.attributeName == '__sp_done'){
+				resultNodes.push(mutation.target)
+			}
+		});
+		if (resultNodes.length > 0){
+			process(resultNodes)
+		}
 
 	});
 
