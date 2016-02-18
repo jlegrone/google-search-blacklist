@@ -140,7 +140,7 @@ document.addEventListener('DOMContentLoaded', function () {
 		});
 	};
 
-	function mutationDetectedHandler(nodes){
+	function mutationDetectedHandler(){
 		// pause MutationObserver while manipulating DOM
 		observer.disconnect();
 
