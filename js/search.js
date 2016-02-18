@@ -139,7 +139,7 @@ document.addEventListener('DOMContentLoaded', function () {
 
 		resultNodes = [];
 
-    mutations.forEach(function(mutation) {
+		mutations.forEach(function(mutation) {
     	if (mutation.target.className == 'g' && mutation.attributeName == '__sp_done'){
     		resultNodes.push(mutation.target)
     	}
