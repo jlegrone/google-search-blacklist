@@ -139,24 +139,21 @@ document.addEventListener('DOMContentLoaded', function () {
 
 		resultNodes = [];
 
-	    mutations.forEach(function(mutation) {
-
-	    	if (mutation.target.className == 'g' && mutation.attributeName == '__sp_done'){
-	    		resultNodes.push(mutation.target);
-	    	}
-
-	    });
-
-	    if (resultNodes.length > 0){
-	    	process(resultNodes);
-	    }
+    mutations.forEach(function(mutation) {
+    	if (mutation.target.className == 'g' && mutation.attributeName == '__sp_done'){
+    		resultNodes.push(mutation.target)
+    	}
+    });
+    if (resultNodes.length > 0){
+    	process(resultNodes)
+    }
 
 	});
 
 	observer.init = function(){
 		this.observe(document.getElementById('search'), {
-	    	attributes: true,
-	    	subtree: true
+			attributes: true,
+			subtree: true
 		});
 	};
 
